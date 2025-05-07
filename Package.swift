@@ -22,7 +22,7 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "SwiftDownCoreTests",
+            name: "CoreTests",
             dependencies: ["Core"],
             resources: [
                 .copy("input")
