@@ -15,7 +15,6 @@ public extension FileReader {
 		return try fm.contentsOfDirectory(at: folderURL, includingPropertiesForKeys: nil)
 	}
 	
-	
 	func readFile(at url: URL) throws -> String {
 		try String(contentsOf: url, encoding: .utf8)
 	}
@@ -43,7 +42,6 @@ public extension FileReader {
 			)
 		}
 	}
-	
 	
 	func copyFiles(from sourceURL: URL, to destinationURL: URL, excluding excludedFileNames: [String]) throws {
 		let fileManager = FileManager.default
