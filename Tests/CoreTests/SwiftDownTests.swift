@@ -27,8 +27,8 @@ final class SwiftDownTests: XCTestCase, FileReader {
         return try String(contentsOfFile: url.path, encoding: .utf8)
     }
     
-    func makeSUT() -> SwiftDown {
-        SwiftDown(
+    func makeSUT() -> Swiftdown {
+        Swiftdown(
             runner: CodeRunner.swift,
             syntaxParser: SwiftSyntaxHighlighter(),
             logsParser: LogsParser(),

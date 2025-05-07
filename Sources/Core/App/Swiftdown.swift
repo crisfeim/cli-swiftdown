@@ -1,6 +1,6 @@
 import Foundation
 
-public struct SwiftDown: FileHandler {
+public struct Swiftdown: FileHandler {
     
     let runner         : Runner
     
@@ -104,7 +104,7 @@ func >>><A>(first: @escaping (A) -> A, second: @escaping (A) -> A) -> (A) -> A {
     return { input in second(first(input)) }
 }
 
-extension SwiftDown {
+extension Swiftdown {
     public struct Author {
         let name: String
         let website: String

@@ -7,7 +7,7 @@ import Core
 import Server
 
 enum Composer {
-    static func compose(with pathURL: String) throws -> (SwiftDown, Server) {
+    static func compose(with pathURL: String) throws -> (Swiftdown, Server) {
         let folderURL   = URL(fileURLWithPath: pathURL).standardizedFileURL
         let sourcesURL  = folderURL.appendingPathComponent("sources")
         let themeURL    = folderURL.appendingPathComponent("theme")
@@ -28,9 +28,9 @@ enum Composer {
         sourcesURL: URL,
         themeURL: URL,
         outputURL: URL
-    ) -> (SwiftDown, Server) {
+    ) -> (Swiftdown, Server) {
 
-        let ssg = SwiftDown(
+        let ssg = Swiftdown(
             runner: CodeRunner.swift,
             syntaxParser: SwiftSyntaxHighlighter(),
             logsParser: LogsParser(),
