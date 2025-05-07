@@ -1,8 +1,6 @@
 import Foundation
 
-public protocol Runner {
-	func run(_ code: String, with tmpFilename: String, extension ext: String?) throws -> String
-}
+
 
 public protocol Parser {
 	func parse(_ string: String) -> String
