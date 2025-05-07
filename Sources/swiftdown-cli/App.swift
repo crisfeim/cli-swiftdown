@@ -19,7 +19,7 @@ extension SwiftDownCLI {
                 var folder: String = "."
         
         func run() throws {
-            let (ssg, _) = try Composer.compose(folder)
+            let (ssg, _) = try Composer.compose(with: folder)
             try ssg.build()
         }
     }
@@ -28,7 +28,7 @@ extension SwiftDownCLI {
         @Argument(help: "Project folder's path")
                 var folder: String = "."
         func run() throws {
-            let (_, server) = try Composer.compose(folder)
+            let (_, server) = try Composer.compose(with: folder)
             server.run()
         }
     }
