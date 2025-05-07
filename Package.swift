@@ -30,7 +30,10 @@ let package = Package(
         ),
         .testTarget(
             name: "swiftdownTests",
-            dependencies: ["swiftdown"]
+            dependencies: ["swiftdown"],
+            resources: [
+                .copy("input")
+            ]
         )
     ]
 )
