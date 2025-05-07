@@ -42,7 +42,7 @@ enum Composer {
             author: .init(name: "Cristian Felipe Patiño Rojas", website: "https://crisfe.me")
         )
         
-        let requestHandler = SwiftDown.RequestHandler(
+        let requestHandler = RequestHandler(
             parser: ssg.parse,
             themeURL: themeURL,
             sourcesURL: sourcesURL,

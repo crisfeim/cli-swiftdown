@@ -1,7 +1,6 @@
 // Created by Cristian Felipe Patiño Rojas on 7/5/25.
 
 import XCTest
-import SwiftDownCore
 import SimpleServer
 import swiftdown
 
@@ -51,8 +50,8 @@ final class RequestHandlerTests: XCTestCase {
         XCTAssertEqual(response.binaryData , expectedResult)
     }
     
-    func makeSUT() -> SwiftDown.RequestHandler {
-        SwiftDown.RequestHandler(
+    func makeSUT() -> RequestHandler {
+        RequestHandler(
             parser: {try String(contentsOf: $0, encoding: .utf8)},
             themeURL: themeFolder(),
             sourcesURL: sourcesFolder(),
