@@ -1,7 +1,7 @@
 // Created by Cristian Felipe Patiño Rojas on 7/5/25.
 
 import XCTest
-import SimpleServer
+import Server
 import swiftdown
 
 final class RequestHandlerTests: XCTestCase {

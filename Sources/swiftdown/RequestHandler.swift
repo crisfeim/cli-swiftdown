@@ -2,7 +2,7 @@
 
 
 import Foundation
-import SimpleServer
+import Server
 import SwiftDownCore
 
 public struct RequestHandler {
