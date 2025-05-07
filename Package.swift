@@ -10,6 +10,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.0")
     ],
     targets: [
+        .target(name: "SwiftDownCore"),
         .target(name: "swiftdown"),
         .executableTarget(
             name: "swiftdown-cli",
