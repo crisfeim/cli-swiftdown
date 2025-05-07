@@ -74,7 +74,7 @@ public struct SwiftDown: FileHandler {
         return "<ul>\(elements)</ul>"
     }
     
-    func parse(_ url: URL) throws -> String {
+    public func parse(_ url: URL) throws -> String {
         let filename = url.lastPathComponent
         let contents = try String(contentsOf: url, encoding: .utf8)
         
@@ -120,36 +120,3 @@ extension SwiftSyntaxHighlighter: Parser {}
 extension MarkdownParser		 : Parser {}
 extension LogsParser			 : Parser {}
 extension CodeRunner			 : Runner {}
-
-extension SwiftDown {
-    static func makeCore() -> (SwiftDown, Server) {
-        
-        let currentDir = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-        
-        let themeURL   = currentDir.appendingPathComponent("input/theme")
-        let sourcesURL = currentDir.appendingPathComponent("input/sources")
-        let outputURL  = currentDir.appendingPathComponent("input/output")
-        
-        let ssg = SwiftDown(
-            runner: CodeRunner.swift,
-            syntaxParser: SwiftSyntaxHighlighter(),
-            logsParser: LogsParser(),
-            markdownParser: MarkdownParser(),
-            sourcesURL: sourcesURL,
-            outputURL: outputURL,
-            themeURL: themeURL,
-            langExtension: "swift",
-            author: .init(name: "Cristian Felipe Patiño Rojas", website: "https://crisfe.me")
-        )
-        
-        let requestHandler = SwiftDown.RequestHandler(
-            parser: ssg.parse,
-            themeURL: themeURL,
-            sourcesURL: sourcesURL,
-            sourceExtension: "swift"
-        )
-        
-        let server = Server(port: 4000, requestHandler: requestHandler.process)
-        return (ssg, server)
-    }
-}

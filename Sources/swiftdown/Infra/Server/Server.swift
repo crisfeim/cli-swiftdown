@@ -1,11 +1,16 @@
 import Foundation
 
-struct Server {
-	typealias RequestHandler = (Request) -> Response
+public struct Server {
+	public typealias RequestHandler = (Request) -> Response
 	let port: UInt16
 	let requestHandler: RequestHandler
 
-	func run() {
+    public init(port: UInt16, requestHandler: @escaping RequestHandler) {
+        self.port = port
+        self.requestHandler = requestHandler
+    }
+    
+	public func run() {
 		
 		let _socket = socket(AF_INET, SOCK_STREAM, 0)
 		guard _socket >= 0 else {
