@@ -27,8 +27,7 @@ struct LogsParser {
 			let symbol = match.2
 			return "<button onclick=\"gotomatchingline(\(lineNumber))\">\(lineNumber)</button> \(symbol) "
 		}
-		
-		return result
+        return ""
 	}
 }
 

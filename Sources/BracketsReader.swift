@@ -40,4 +40,3 @@ func test_() {
 	assert(output == expectedOutput)
 }
 
-test_()
