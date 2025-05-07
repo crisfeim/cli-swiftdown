@@ -2,9 +2,7 @@ import Foundation
 
 
 
-public protocol Parser {
-	func parse(_ string: String) -> String
-}
+
 
 public struct SwiftDown: FileHandler {
 	
