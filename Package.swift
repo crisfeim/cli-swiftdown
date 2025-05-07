@@ -27,6 +27,10 @@ let package = Package(
             resources: [
                 .copy("input")
             ]
+        ),
+        .testTarget(
+            name: "swiftdownTests",
+            dependencies: ["swiftdown"]
         )
     ]
 )
