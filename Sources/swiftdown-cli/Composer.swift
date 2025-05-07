@@ -3,7 +3,7 @@
 
 import Foundation
 import ArgumentParser
-import swiftdown
+import SwiftDownCore
 
 enum Composer {
     static func compose(with pathURL: String) throws -> (SwiftDown, Server) {

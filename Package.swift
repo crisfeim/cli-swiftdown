@@ -15,13 +15,13 @@ let package = Package(
         .executableTarget(
             name: "swiftdown-cli",
             dependencies: [
-                "swiftdown",
+                "SwiftDownCore",
                 .product(name: "ArgumentParser", package: "swift-argument-parser")
             ]
         ),
         .testTarget(
             name: "swiftdown-tests",
-            dependencies: ["swiftdown"],
+            dependencies: ["SwiftDownCore"],
             resources: [
                 .copy("input")
             ]
