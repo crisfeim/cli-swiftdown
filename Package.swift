@@ -11,9 +11,8 @@ let package = Package(
     ],
     targets: [
         .target(name: "SwiftDownCore"),
-        .target(name: "swiftdown"),
         .executableTarget(
-            name: "swiftdown-cli",
+            name: "swiftdown",
             dependencies: [
                 "SwiftDownCore",
                 .product(name: "ArgumentParser", package: "swift-argument-parser")
