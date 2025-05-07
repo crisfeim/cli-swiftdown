@@ -3,7 +3,7 @@
 
 import Foundation
 import ArgumentParser
-import SwiftDownCore
+import Core
 import Server
 
 enum Composer {

@@ -2,7 +2,7 @@
 
 import Foundation
 import ArgumentParser
-import SwiftDownCore
+import Core
 
 @main
 struct SwiftDownCLI: ParsableCommand {

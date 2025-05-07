@@ -3,7 +3,7 @@
 
 import Foundation
 import Server
-import SwiftDownCore
+import Core
 
 public struct RequestHandler {
     let parser    : (URL) throws -> String

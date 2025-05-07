@@ -1,7 +1,7 @@
 // Created by Cristian Felipe Patiño Rojas on 8/5/25.
 
 import XCTest
-import SwiftDownCore
+import Core
 
 class DefinitionsHighlighterTests: XCTestCase {
     

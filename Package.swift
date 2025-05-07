@@ -11,19 +11,19 @@ let package = Package(
         .package(url: "https://github.com/JohnSundell/Splash", from: "0.1.0")
     ],
     targets: [
-        .target(name: "SwiftDownCore", dependencies: ["Splash"]),
+        .target(name: "Core", dependencies: ["Splash"]),
         .target(name: "Server"),
         .executableTarget(
             name: "swiftdown",
             dependencies: [
-                "SwiftDownCore",
+                "Core",
                 "Server",
                 .product(name: "ArgumentParser", package: "swift-argument-parser")
             ]
         ),
         .testTarget(
             name: "SwiftDownCoreTests",
-            dependencies: ["SwiftDownCore", "Server", "swiftdown"],
+            dependencies: ["Core", "Server", "swiftdown"],
             resources: [
                 .copy("input")
             ]
