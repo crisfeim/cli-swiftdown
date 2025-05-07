@@ -182,5 +182,3 @@ func launch_server() {
 	Server(port: 8080, requestHandler: rh).run()
 }
 
-//try! Tests().run()
-launch_server()
