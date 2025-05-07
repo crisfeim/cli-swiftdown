@@ -4,11 +4,19 @@
 import Foundation
 
 public struct Response {
-	let statusCode: Int
-	public let contentType: String
-	let body: Body
-	
-	enum Body {
+    public let statusCode: Int
+    public let contentType: String
+    public let body: Body
+    
+    public init(statusCode: Int, contentType: String, body: Body) {
+        self.statusCode = statusCode
+        self.contentType = contentType
+        self.body = body
+    }
+}
+
+extension Response {
+	public enum Body {
 		case text(String)
 		case binary(Data)
 	}

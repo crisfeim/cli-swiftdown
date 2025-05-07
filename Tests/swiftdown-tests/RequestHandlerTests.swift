@@ -2,6 +2,8 @@
 
 import XCTest
 import SwiftDownCore
+import SimpleServer
+import swiftdown
 
 final class RequestHandlerTests: XCTestCase {
     

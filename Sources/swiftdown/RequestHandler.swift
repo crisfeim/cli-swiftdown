@@ -2,6 +2,8 @@
 
 
 import Foundation
+import SimpleServer
+import SwiftDownCore
 
 extension SwiftDown {
     public struct RequestHandler {

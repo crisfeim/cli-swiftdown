@@ -12,16 +12,18 @@ let package = Package(
     ],
     targets: [
         .target(name: "SwiftDownCore", dependencies: ["Splash"]),
+        .target(name: "SimpleServer"),
         .executableTarget(
             name: "swiftdown",
             dependencies: [
                 "SwiftDownCore",
+                "SimpleServer",
                 .product(name: "ArgumentParser", package: "swift-argument-parser")
             ]
         ),
         .testTarget(
             name: "swiftdown-tests",
-            dependencies: ["SwiftDownCore"],
+            dependencies: ["SwiftDownCore", "SimpleServer", "swiftdown"],
             resources: [
                 .copy("input")
             ]

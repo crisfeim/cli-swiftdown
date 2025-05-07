@@ -4,9 +4,9 @@
 import Foundation
 
 public struct Request  {
-	let method: Method
-	let body: Data?
-	let path: String
+	public let method: Method
+	public let body: Data?
+	public let path: String
     
     public init(method: Method, body: Data? = nil, path: String) {
         self.method = method
