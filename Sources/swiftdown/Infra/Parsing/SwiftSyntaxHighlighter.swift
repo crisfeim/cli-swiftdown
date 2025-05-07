@@ -1,7 +1,7 @@
 import Foundation
 
 public struct SwiftSyntaxHighlighter {
-	
+    #warning("Import Splash and remove invocation through bin")
 	private let splash = CommandRunner.splash
 	private let lineInjector = LineInjector()
 	private let defintionHighlighter = DefinitionsHighlighter()
@@ -143,6 +143,7 @@ extension SwiftSyntaxHighlighter {
 }
 
 
+#warning("Move to test target")
 class DefinitionsHighlighterTests {
 	func run() {
 		test_class()
