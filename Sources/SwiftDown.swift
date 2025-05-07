@@ -95,7 +95,7 @@ public struct SwiftDown: FileHandler {
 			"$files": try renderFiles()
 		]
 		
-		return try TemplateRenderer(folder: themeURL, data: data).render()	
+		return try TemplateEngine(folder: themeURL, data: data).render()	
 	}
 	
 	func writeTemplateAssets() throws {
