@@ -12,6 +12,5 @@ public struct MarkdownParser {
 		.replacingOccurrences(of: "~~(.*?)~~", with: "<del>$1</del>", options: .regularExpression)
 		.replacingOccurrences(of: "!\\[(.*?)\\]\\((.*?)\\)", with: "<img src=\"$2\" alt=\"$1\" />", options: .regularExpression)
 		.replacingOccurrences(of: "`(.*?)`", with: "<code>$1</code>")
-		//.replacingOccurrences(of: "\\[(.*?)\\]\\((.*?)\\)", with: "<a href=\"$2\">$1</a>", options: .regularExpression)
 	}
 }
