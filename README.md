@@ -25,6 +25,12 @@ All within the comfort of a `.swift` file.
 - Generates a standalone `.html` file (no assets or dependencies).
 - Command-line usage.
 
+## 📹 Demo
+
+
+https://github.com/user-attachments/assets/1558827f-cb87-45d3-92f6-f3ecb8680c7f
+
+
 ## 📦 Installation
 
 Clone this repo and build:
