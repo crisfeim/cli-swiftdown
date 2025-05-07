@@ -6,6 +6,8 @@ A Swift-based article generator for technical writing in `.swift` files.
 
 **Swiftdown** lets you write entire technical articles using Swift files. Comments become prose. Code stays as code.
 
+![](swiftdown.png)
+
 ## Motivation
 
 Writing in Markdown is fine. But for developers writing about Swift, it's disconnected. Swiftodwn keeps everything in the same medium:
