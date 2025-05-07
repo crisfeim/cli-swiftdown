@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>array-diccionario.swift</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<link rel="stylesheet" type="text/css" href="css/toggle-dark-side-min.css">
+		<link rel="stylesheet" href="https://unpkg.com/pyloncss@latest/css/pylon.css"/>
+		<script src="https://unpkg.com/htmx.org@2.0.3"></script>
+		<!--<script src="https://unpkg.com/hyperscript.org@0.9.12"></script>-->
+	</head>
+	<body>
+		
+		<!--<vstack id="navigator"><ul><li>
+<a	href="#"
+	onclick="loadContent('/array-as-dict.swift', 'main'); return false;">
+	array-as-dict.swift
+</a><li>
+<a	href="#"
+	onclick="loadContent('/example.swift', 'main'); return false;">
+	example.swift
+</a><li>
+<a	href="#"
+	onclick="loadContent('/loginController.swift', 'main'); return false;">
+	loginController.swift
+</a><li>
+<a	href="#"
+	onclick="loadContent('/_uikit.swift', 'main'); return false;">
+	_uikit.swift
+</a><li>
+<a	href="#"
+	onclick="loadContent('/who-stole-my-mvc.swift', 'main'); return false;">
+	who-stole-my-mvc.swift
+</a><li>
+<a	href="#"
+	onclick="loadContent('/array-diccionario.swift', 'main'); return false;">
+	array-diccionario.swift
+</a></ul></vstack>-->
+		<main id="main">
+			<vstack id="floating-buttons" spacing="m">
+				
+				
+				<button id="theme-toggle" class="theme-toggle" type="button" title="Toggle theme" aria-label="Toggle theme" onclick="toggle()">
+					<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="1em" height="1em" class="theme-toggle__dark-side" fill="currentColor" viewBox="0 0 32 32">
+						<path d="M16 .5C7.4.5.5 7.4.5 16S7.4 31.5 16 31.5 31.5 24.6 31.5 16 24.6.5 16 .5zm0 28.1V3.4C23 3.4 28.6 9 28.6 16S23 28.6 16 28.6z"></path>
+					</svg>
+				</button>
+				
+				<button id="toggle-color" onclick="toggleColor()">
+					<div class="first"></div>
+					<div class="second"></div>
+					<div class="third"></div>
+				</button>
+				
+				
+			</vstack>
+			<div id="go-to-line">
+				<input type="text" id="line-input" placeholder="Line number" class="hide"/>
+			</div>
+			<div id="top-controls">
+				<hstack id="top-controls-content" class="article-width">
+					<spacer></spacer>
+					<button id="play-button" class="button" onclick="run()">
+						<?xml version="1.0" encoding="iso-8859-1"?>
+						<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+						<svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+							viewBox="0 0 17.804 17.804" xml:space="preserve">®
+							<g>
+								<g id="c98_play">
+									<path d="M2.067,0.043C2.21-0.028,2.372-0.008,2.493,0.085l13.312,8.503c0.094,0.078,0.154,0.191,0.154,0.313
+			c0,0.12-0.061,0.237-0.154,0.314L2.492,17.717c-0.07,0.057-0.162,0.087-0.25,0.087l-0.176-0.04
+			c-0.136-0.065-0.222-0.207-0.222-0.361V0.402C1.844,0.25,1.93,0.107,2.067,0.043z"/>
+								</g>
+								<g id="Capa_1_78_">
+								</g>
+							</g>
+						</svg>
+					</button>
+					
+					<button id="layout-button" class="button" onclick="switchViewMode()">
+						<?xml version="1.0" encoding="utf-8"?>
+						
+						<svg width="800px" height="800px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+							<title>expand-horizontal</title>
+							<g id="Layer_2" data-name="Layer 2">
+								<g id="invisible_box" data-name="invisible box">
+									<rect width="48" height="48" fill="none"/>
+								</g>
+								<g id="Q3_icons" data-name="Q3 icons">
+									<g>
+										<path d="M30.6,28.6a1.9,1.9,0,0,0,.2,3,2.1,2.1,0,0,0,2.7-.2l5.9-6a1.9,1.9,0,0,0,0-2.8l-5.9-6a2.1,2.1,0,0,0-2.7-.2,1.9,1.9,0,0,0-.2,3L33.2,22H14.8l2.6-2.6a1.9,1.9,0,0,0-.2-3,2.1,2.1,0,0,0-2.7.2l-5.9,6a1.9,1.9,0,0,0,0,2.8l5.9,6a2.1,2.1,0,0,0,2.7.2,1.9,1.9,0,0,0,.2-3L14.8,26H33.2Z"/>
+										<path d="M42,6V42a2,2,0,0,0,4,0V6a2,2,0,0,0-4,0Z"/>
+										<path d="M6,42V6A2,2,0,0,0,2,6V42a2,2,0,0,0,4,0Z"/>
+									</g>
+								</g>
+							</g>
+						</svg>
+					</button>
+				</hstack>
+			</div>
+			<hstack id="article-info" class="article-width">
+				<div class="author-picture">
+					<img src="assets/author.jpg"/>
+				</div>
+				<vstack>
+					<address class="author"><a rel="author" href="https://cristian.lat">Cristian Felipe Patiño Rojas</a></address> 
+					<time pubdate datetime="2025-11-25" title="2025-11-25">2025-11-25</time>
+				</vstack>
+			</hstack>
+			<pre id="code" class="article-width"><code><span id="line-1" class="line-number ">1</span><span class="keyword">import</span> Foundation
+<span id="line-2" class="line-number empty-line">2</span>
+<span id="line-3" class="line-number ">3</span><span class="comment"><strong>Introducción</strong>
+<span id="line-4" class="line-number empty-line">4</span>
+<span id="line-5" class="line-number ">5</span>En Swift, los arrays y diccionarios son herramientas fundamentales para organizar datos.
+<span id="line-6" class="line-number ">6</span>Mientras que los diccionarios ofrecen ergonomía para acceder y modificar elementos por clave, 
+<span id="line-7" class="line-number ">7</span>los arrays son el tipo más común en aplicaciones que recuperan datos de apis remotas o
+<span id="line-8" class="line-number ">8</span>soluciones de almacenamiento locales.
+<span id="line-9" class="line-number empty-line">9</span>
+<span id="line-10" class="line-number ">10</span>En este artículo exploraremos cómo mejorar la manipulación de arrays utilizando subscripts
+<span id="line-11" class="line-number ">11</span>personalizados para obtener la simplicidad de un diccionario.
+<span id="line-12" class="line-number empty-line">12</span>
+<span id="line-13" class="line-number ">13</span><strong>Manipulación de diccionarios</strong>
+<span id="line-14" class="line-number empty-line">14</span>
+<span id="line-15" class="line-number ">15</span>En Swift, manipular los datos de un diccionario es bastante fácil,
+<span id="line-16" class="line-number ">16</span>por ejemplo, si tuvieramos un modelo como este:</span>
+<span id="line-17" class="line-number empty-line">17</span>
+<span id="line-18" class="line-number ">18</span><span class="keyword">struct</span> <span class="type-definition">Model</span> {
+<span id="line-19" class="line-number ">19</span>    <span class="keyword">let</span> <span class="other-definition">id</span>: <span class="type">Int</span> 
+<span id="line-20" class="line-number ">20</span>    <span class="keyword">var</span> <span class="other-definition">name</span>: <span class="type">String</span>?
+<span id="line-21" class="line-number ">21</span>}
+<span id="line-22" class="line-number empty-line">22</span>
+<span id="line-23" class="line-number ">23</span><span class="comment">Y un diccionario cuyas claves fuesen del mismo tipo  que el `id`
+<span id="line-24" class="line-number ">24</span>de ese modelo:</span>
+<span id="line-25" class="line-number empty-line">25</span>
+<span id="line-26" class="line-number ">26</span><span class="keyword">var</span> <span class="other-definition">dict</span> = [<span class="type">Int</span>: <span class="custom-type">Model</span>]()
+<span id="line-27" class="line-number empty-line">27</span>
+<span id="line-28" class="line-number ">28</span><span class="comment">Podríamos realizar acciones CRUD de una manera muy sencilla:</span>
+<span id="line-29" class="line-number empty-line">29</span>
+<span id="line-30" class="line-number ">30</span><strong><span class="type">C</span>:</strong> dict[<span class="number">1</span>] = <span class="custom-type">Model</span>(id: <span class="number">1</span>, name: <span class="string">"Some name"</span>)
+<span id="line-31" class="line-number ">31</span><strong><span class="type">R</span>:</strong> <span class="keyword">_</span> = dict[<span class="number">1</span>] 
+<span id="line-32" class="line-number ">32</span><strong><span class="type">U</span>:</strong> dict[<span class="number">1</span>]?.name = <span class="string">"New name"</span>
+<span id="line-33" class="line-number ">33</span><strong><span class="type">D</span>:</strong> dict[<span class="number">1</span>] = <span class="keyword">nil</span>
+<span id="line-34" class="line-number empty-line">34</span>
+<span id="line-35" class="line-number ">35</span><span class="comment"><strong>Manipulación de arrays</strong>
+<span id="line-36" class="line-number empty-line">36</span>
+<span id="line-37" class="line-number ">37</span>Con un array, manipularíamos los datos de una manera más verbosa:</span>
+<span id="line-38" class="line-number empty-line">38</span>
+<span id="line-39" class="line-number ">39</span><span class="keyword">var</span> <span class="other-definition">array</span> = [<span class="custom-type">Model</span>]()
+<span id="line-40" class="line-number empty-line">40</span>
+<span id="line-41" class="line-number ">41</span><strong><span class="type">C</span>:</strong> array.<span class="call">append</span>(<span class="custom-type">Model</span>(id: <span class="number">1</span>, name: <span class="string">"Some name"</span>))
+<span id="line-42" class="line-number empty-line">42</span>
+<span id="line-43" class="line-number ">43</span><span class="comment"><em>(podemos leer un elemento en el array de varias maneras)</em></span>
+<span id="line-44" class="line-number empty-line">44</span>
+<span id="line-45" class="line-number ">45</span><strong><span class="type">R</span>:</strong> <span class="keyword">_</span> = array.<span class="call">filter</span> { $0.<span class="property">id</span> == <span class="number">1</span> }.first
+<span id="line-46" class="line-number ">46</span><strong><span class="type">R</span>:</strong> <span class="keyword">_</span> = array[<span class="number">0</span>] <span class="comment"><em>(inseguro, puede crashear)</em></span>
+<span id="line-47" class="line-number ">47</span><strong><span class="type">R</span>:</strong> 
+<span id="line-48" class="line-number ">48</span><span class="keyword">if let</span> idx = array.<span class="call">firstIndex</span>(where: {$0.<span class="property">id</span> == <span class="number">1</span>}) {
+<span id="line-49" class="line-number ">49</span>    <span class="keyword">_</span> = array[idx]
+<span id="line-50" class="line-number ">50</span>}
+<span id="line-51" class="line-number empty-line">51</span>
+<span id="line-52" class="line-number ">52</span><strong><span class="type">U</span>:</strong> array[<span class="number">0</span>].name = <span class="string">"Some name"</span> <span class="comment"><em>(inseguro)</em></span>
+<span id="line-53" class="line-number ">53</span><strong><span class="type">U</span>:</strong>
+<span id="line-54" class="line-number ">54</span><span class="keyword">if let</span> idx = array.<span class="call">firstIndex</span>(where: {$0.<span class="property">id</span> == <span class="number">1</span>}) {
+<span id="line-55" class="line-number ">55</span>    array[idx].name = <span class="string">"Some name"</span>
+<span id="line-56" class="line-number ">56</span>}
+<span id="line-57" class="line-number empty-line">57</span>
+<span id="line-58" class="line-number ">58</span><strong><span class="type">D</span>:</strong>
+<span id="line-59" class="line-number ">59</span><span class="keyword">if let</span> idx = array.<span class="call">firstIndex</span>(where: {$0.<span class="property">id</span> == <span class="number">1</span>}) {
+<span id="line-60" class="line-number ">60</span>    array.<span class="call">remove</span>(at: idx)
+<span id="line-61" class="line-number ">61</span>}
+<span id="line-62" class="line-number empty-line">62</span>
+<span id="line-63" class="line-number ">63</span><span class="comment"><strong>Usando un subscript personalizado</strong>:
+<span id="line-64" class="line-number empty-line">64</span>
+<span id="line-65" class="line-number ">65</span>Cómo vemos, la ergonomía de un diccionario es mucho más práctica
+<span id="line-66" class="line-number ">66</span>y concisa, especialmente en los casos de actualización y eliminación,
+<span id="line-67" class="line-number ">67</span>en los que que con un array necesitamos un paso previo de recuperación
+<span id="line-68" class="line-number ">68</span>del índice del elemento a actualizar/eliminar
+<span id="line-69" class="line-number empty-line">69</span>
+<span id="line-70" class="line-number ">70</span>Swift nos permite crear métodos `subscript` personalizados para 
+<span id="line-71" class="line-number ">71</span>manipular colecciones.
+<span id="line-72" class="line-number empty-line">72</span>
+<span id="line-73" class="line-number ">73</span>Gracias a esta funcionalidad, podemos obtener una api de manipulación 
+<span id="line-74" class="line-number ">74</span>de arrays idéntica a la de un diccionario.
+<span id="line-75" class="line-number empty-line">75</span>
+<span id="line-76" class="line-number ">76</span>El único requisito es que los elementos de nuestro array conformen al
+<span id="line-77" class="line-number ">77</span>protocolo `Identifiable`.
+<span id="line-78" class="line-number empty-line">78</span>
+<span id="line-79" class="line-number ">79</span><strong>Implementación:</strong>
+<span id="line-80" class="line-number empty-line">80</span>
+<span id="line-81" class="line-number ">81</span>El subscript encapsula el boilerplate de creación, lectura, actualización
+<span id="line-82" class="line-number ">82</span>y eliminación que generalmente declaramos de forma manual con un array:</span>
+<span id="line-83" class="line-number empty-line">83</span>
+<span id="line-84" class="line-number ">84</span><span class="keyword-extension">extension</span> <span class="type">Array</span> <span class="keyword">where</span> <span class="type">Element</span>: <span class="type">Identifiable</span> {
+<span id="line-85" class="line-number ">85</span>    <span class="comment">
+<span id="line-86" class="line-number ">86</span>    Toma come clave el id de sus elementos...</span>
+<span id="line-87" class="line-number empty-line">87</span>    
+<span id="line-88" class="line-number ">88</span>    <span class="keyword">subscript</span>(id: <span class="type">Element</span>.<span class="type">ID</span>) -&gt; <span class="type">Element</span>? {
+<span id="line-89" class="line-number ">89</span>        <span class="comment">
+<span id="line-90" class="line-number ">90</span>        ... y al igual que un diccionario, devuelve un opcional...
+<span id="line-91" class="line-number empty-line">91</span>        
+<span id="line-92" class="line-number ">92</span>        
+<span id="line-93" class="line-number ">93</span>        <strong>Lectura:</strong></span>
+<span id="line-94" class="line-number empty-line">94</span>        
+<span id="line-95" class="line-number ">95</span>        <span class="keyword">get</span> { <span class="call">first</span> { $0.<span class="property">id</span> == id } }
+<span id="line-96" class="line-number ">96</span>        <span class="call">set</span>(newValue) {
+<span id="line-97" class="line-number ">97</span>            <span class="comment">
+<span id="line-98" class="line-number ">98</span>            <strong>Actualización/Eliminación:</strong>
+<span id="line-99" class="line-number ">99</span>            Si ya existe un elemento con el mismo ID, actualizamos
+<span id="line-100" class="line-number ">100</span>            o eliminamos en función de si el nuevo valor es nulo o no:
+<span id="line-101" class="line-number ">101</span>            </span>
+<span id="line-102" class="line-number ">102</span>            <span class="keyword">if let</span> index = <span class="call">firstIndex</span>(where: { $0.<span class="property">id</span> == id }) {
+<span id="line-103" class="line-number ">103</span>                <span class="keyword">if let</span> newValue = newValue {
+<span id="line-104" class="line-number ">104</span>                    <span class="keyword">self</span>[index] = newValue
+<span id="line-105" class="line-number ">105</span>                } <span class="keyword">else</span> {
+<span id="line-106" class="line-number ">106</span>                    <span class="call">remove</span>(at: index)
+<span id="line-107" class="line-number ">107</span>                }
+<span id="line-108" class="line-number ">108</span>                <span class="comment">
+<span id="line-109" class="line-number ">109</span>                <strong>Creación</strong>
+<span id="line-110" class="line-number ">110</span>                Si no existe, simplemente lo añadimos al array:
+<span id="line-111" class="line-number ">111</span>                </span>
+<span id="line-112" class="line-number ">112</span>            } <span class="keyword">else if let</span> newValue = newValue {
+<span id="line-113" class="line-number ">113</span>                <span class="call">append</span>(newValue)
+<span id="line-114" class="line-number ">114</span>            }
+<span id="line-115" class="line-number ">115</span>        }
+<span id="line-116" class="line-number ">116</span>    }
+<span id="line-117" class="line-number ">117</span>}
+<span id="line-118" class="line-number empty-line">118</span>
+<span id="line-119" class="line-number ">119</span><span class="comment"><strong>Uso:</strong></span>
+<span id="line-120" class="line-number empty-line">120</span>
+<span id="line-121" class="line-number ">121</span><span class="keyword">struct</span> <span class="type-definition">Todo</span>: <span class="type">Identifiable</span> {
+<span id="line-122" class="line-number ">122</span>    <span class="keyword">let</span> <span class="other-definition">id</span> = <span class="type">UUID</span>()
+<span id="line-123" class="line-number ">123</span>    <span class="keyword">var</span> <span class="other-definition">description</span>: <span class="type">String</span>
+<span id="line-124" class="line-number ">124</span>    <span class="keyword">var</span> <span class="other-definition">isChecked</span> = <span class="keyword">false
+<span id="line-125" class="line-number empty-line">125</span>    
+<span id="line-126" class="line-number ">126</span>    init</span>(<span class="keyword">_</span> description: <span class="type">String</span>) {
+<span id="line-127" class="line-number ">127</span>        <span class="keyword">self</span>.<span class="property">description</span> = description
+<span id="line-128" class="line-number ">128</span>    }
+<span id="line-129" class="line-number ">129</span>}
+<span id="line-130" class="line-number empty-line">130</span>
+<span id="line-131" class="line-number ">131</span><span class="keyword">final class</span> <span class="type-definition">TodoStore</span>: <span class="type">ObservableObject</span> {
+<span id="line-132" class="line-number empty-line">132</span>    
+<span id="line-133" class="line-number ">133</span>    <span class="keyword">@Published private(set) var</span> data = [<span class="custom-type">Todo</span>]()
+<span id="line-134" class="line-number empty-line">134</span>    
+<span id="line-135" class="line-number ">135</span>    <span class="comment"><em><u>😎 Con subscript:</u></em></span>
+<span id="line-136" class="line-number empty-line">136</span>    
+<span id="line-137" class="line-number ">137</span>    <span class="keyword">func</span> <span class="other-definition">check_1</span>(<span class="keyword">_</span> id: <span class="type">UUID</span>) {
+<span id="line-138" class="line-number ">138</span>        data[id]?.isChecked.<span class="call">toggle</span>()
+<span id="line-139" class="line-number ">139</span>    }
+<span id="line-140" class="line-number empty-line">140</span>    
+<span id="line-141" class="line-number ">141</span>    <span class="comment"><em><u>😫 Sin subscript:</u></em></span>
+<span id="line-142" class="line-number empty-line">142</span>    
+<span id="line-143" class="line-number ">143</span>    <span class="keyword">func</span> <span class="other-definition">check_2</span>(<span class="keyword">_</span> id: <span class="type">UUID</span>) {
+<span id="line-144" class="line-number ">144</span>        <span class="keyword">if let</span> index = data.<span class="call">firstIndex</span>(where: { $0.<span class="property">id</span> == id }) {
+<span id="line-145" class="line-number ">145</span>            data[index].isChecked.<span class="call">toggle</span>()
+<span id="line-146" class="line-number ">146</span>        }
+<span id="line-147" class="line-number ">147</span>    }
+<span id="line-148" class="line-number empty-line">148</span>    
+<span id="line-149" class="line-number ">149</span>    <span class="comment"><em><u>🎉 Más ejemplos:</u></em></span>
+<span id="line-150" class="line-number empty-line">150</span>    
+<span id="line-151" class="line-number ">151</span>    <span class="keyword">func</span> <span class="other-definition">upsert</span>(item: <span class="custom-type">Todo</span>) {
+<span id="line-152" class="line-number ">152</span>        data[item.<span class="property">id</span>] = item
+<span id="line-153" class="line-number ">153</span>    }
+<span id="line-154" class="line-number empty-line">154</span>    
+<span id="line-155" class="line-number ">155</span>    <span class="keyword">func</span> <span class="other-definition">read</span>(id: <span class="type">UUID</span>) -&gt; <span class="custom-type">Todo</span>? {
+<span id="line-156" class="line-number ">156</span>        data[id]
+<span id="line-157" class="line-number ">157</span>    }
+<span id="line-158" class="line-number empty-line">158</span>    
+<span id="line-159" class="line-number ">159</span>    <span class="keyword">func</span> <span class="other-definition">delete</span>(id: <span class="type">UUID</span>) {
+<span id="line-160" class="line-number ">160</span>        data[id] = <span class="keyword">nil</span>
+<span id="line-161" class="line-number ">161</span>    }
+<span id="line-162" class="line-number ">162</span>}
+<span id="line-163" class="line-number empty-line">163</span>
+<span id="line-164" class="line-number ">164</span><span class="keyword">final class</span> <span class="type-definition">ArraySubscriptTests</span> {
+<span id="line-165" class="line-number ">165</span>    <span class="keyword">struct</span> <span class="type-definition">User</span>: <span class="type">Identifiable</span>, <span class="type">Equatable</span> {
+<span id="line-166" class="line-number ">166</span>        <span class="keyword">var</span> <span class="other-definition">id</span> = <span class="type">UUID</span>()
+<span id="line-167" class="line-number ">167</span>        <span class="keyword">var</span> <span class="other-definition">firstName</span>: <span class="type">String</span>
+<span id="line-168" class="line-number ">168</span>        <span class="keyword">var</span> <span class="other-definition">lastName</span>: <span class="type">String</span>
+<span id="line-169" class="line-number ">169</span>    }
+<span id="line-170" class="line-number empty-line">170</span>    
+<span id="line-171" class="line-number ">171</span>    <span class="keyword">func</span> <span class="other-definition">test_create</span>() {
+<span id="line-172" class="line-number ">172</span>        <span class="keyword">let</span> <span class="other-definition">user</span> = <span class="custom-type">User</span>(firstName: <span class="string">"Cristian"</span>, lastName: <span class="string">"Patiño"</span>)
+<span id="line-173" class="line-number ">173</span>        <span class="keyword">var</span> <span class="other-definition">sut</span> = [<span class="custom-type">User</span>]()
+<span id="line-174" class="line-number ">174</span>        sut[user.<span class="property">id</span>] = user
+<span id="line-175" class="line-number ">175</span>        <span class="call">assert</span>(sut[user.<span class="property">id</span>]?.firstName == <span class="string">"Cristian"</span>)
+<span id="line-176" class="line-number ">176</span>    }
+<span id="line-177" class="line-number empty-line">177</span>    
+<span id="line-178" class="line-number ">178</span>    <span class="keyword">func</span> <span class="other-definition">test_update</span>() {
+<span id="line-179" class="line-number ">179</span>        <span class="keyword">var</span> <span class="other-definition">user</span> = <span class="custom-type">User</span>(firstName: <span class="string">"Cristian"</span>, lastName: <span class="string">"Patiño"</span>)
+<span id="line-180" class="line-number ">180</span>        <span class="keyword">var</span> <span class="other-definition">sut</span> = [<span class="custom-type">User</span>]()
+<span id="line-181" class="line-number ">181</span>        sut[user.<span class="property">id</span>] = user
+<span id="line-182" class="line-number empty-line">182</span>        
+<span id="line-183" class="line-number ">183</span>        <span class="comment">Update</span>
+<span id="line-184" class="line-number ">184</span>        user.<span class="property">firstName</span> = <span class="string">"Cristian Felipe"</span>
+<span id="line-185" class="line-number ">185</span>        sut[user.<span class="property">id</span>] = user
+<span id="line-186" class="line-number empty-line">186</span>        
+<span id="line-187" class="line-number ">187</span>        <span class="call">assert</span>(sut[user.<span class="property">id</span>]?.firstName == <span class="string">"Cristian Felipe"</span>)
+<span id="line-188" class="line-number ">188</span>    }
+<span id="line-189" class="line-number empty-line">189</span>    
+<span id="line-190" class="line-number ">190</span>    <span class="keyword">func</span> <span class="other-definition">test_delete</span>() {
+<span id="line-191" class="line-number ">191</span>        <span class="keyword">let</span> <span class="other-definition">user</span> = <span class="custom-type">User</span>(firstName: <span class="string">"Cristian"</span>, lastName: <span class="string">"Patiño"</span>)
+<span id="line-192" class="line-number ">192</span>        <span class="keyword">var</span> <span class="other-definition">sut</span> = [<span class="custom-type">User</span>]()
+<span id="line-193" class="line-number ">193</span>        sut[user.<span class="property">id</span>] = user
+<span id="line-194" class="line-number ">194</span>        <span class="call">assert</span>(sut[user.<span class="property">id</span>] != <span class="keyword">nil</span>)
+<span id="line-195" class="line-number ">195</span>        sut[user.<span class="property">id</span>] = <span class="keyword">nil</span>
+<span id="line-196" class="line-number ">196</span>        assert(sut[user.<span class="property">id</span>] == <span class="keyword">nil</span>)
+<span id="line-197" class="line-number ">197</span>    }
+<span id="line-198" class="line-number empty-line">198</span>    
+<span id="line-199" class="line-number ">199</span>    <span class="keyword">func</span> <span class="other-definition">run</span>() {
+<span id="line-200" class="line-number ">200</span>        <span class="call">test_create</span>()
+<span id="line-201" class="line-number ">201</span>        <span class="call">test_update</span>()
+<span id="line-202" class="line-number ">202</span>        <span class="call">test_delete</span>()
+<span id="line-203" class="line-number ">203</span>    }
+<span id="line-204" class="line-number empty-line">204</span>    
+<span id="line-205" class="line-number ">205</span>    <span class="keyword">func</span> <span class="other-definition">assert</span>(<span class="keyword">_</span> b: <span class="type">Bool</span>, line: <span class="type">UInt</span> = <span class="keyword">#line</span>, function: <span class="type">String</span> = <span class="keyword">#function</span>) {
+<span id="line-206" class="line-number ">206</span>        <span class="keyword">let</span> <span class="other-definition">emoji</span> = b ? <span class="string">"✅"</span> : <span class="string">"❌"</span>
+<span id="line-207" class="line-number ">207</span>        <span class="call">print</span>()
+<span id="line-208" class="line-number ">208</span>    }
+<span id="line-209" class="line-number ">209</span>}
+<span id="line-210" class="line-number empty-line">210</span>
+<span id="line-211" class="line-number ">211</span><span class="custom-type">ArraySubscriptTests</span>().<span class="call">run</span>()
+<span id="line-212" class="line-number empty-line">212</span>
+<span id="line-213" class="line-number ">213</span><span class="comment"><strong>Conclusión</strong>
+<span id="line-214" class="line-number ">214</span>
+<span id="line-215" class="line-number ">215</span>Este pequeño snippet permite obtener varias ventajas, entre ellas:
+<span id="line-216" class="line-number ">216</span>•	Reducción del código repetitivo: Elimina la necesidad de buscar índices manualmente para operaciones comunes.
+<span id="line-217" class="line-number ">217</span>•	Ergonomía: Ofrece una API similar a un diccionario.
+<span id="line-218" class="line-number ">218</span>•	Flexibilidad: Combina lo mejor de ambas estructuras de datos.</span>
+<span id="line-219" class="line-number empty-line">219</span>
+</code></pre>
+			
+			<div id="console">
+				<hstack class="draggerTop">
+					
+					<spacer></spacer>
+					<button id="show-console-button" onclick="run()">
+						<?xml version="1.0" encoding="utf-8"?>
+						<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path d="M17.5 17.6L6.5 17.6M7.8 3H16.2C17.8802 3 18.7202 3 19.362 3.32698C19.9265 3.6146 20.3854 4.07354 20.673 4.63803C21 5.27976 21 6.11984 21 7.8V16.2C21 17.8802 21 18.7202 20.673 19.362C20.3854 19.9265 19.9265 20.3854 19.362 20.673C18.7202 21 17.8802 21 16.2 21H7.8C6.11984 21 5.27976 21 4.63803 20.673C4.07354 20.3854 3.6146 19.9265 3.32698 19.362C3 18.7202 3 17.8802 3 16.2V7.8C3 6.11984 3 5.27976 3.32698 4.63803C3.6146 4.07354 4.07354 3.6146 4.63803 3.32698C5.27976 3 6.11984 3 7.8 3Z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+						</svg>
+					</button>
+				</hstack>
+				<pre id="output" class="article-width">/var/folders/m9/xbnrbp5d1qb1pm_45jmsr5380000gn/T/array-diccionario.swift.no-extension:206:13: warning: initialization of immutable value 'emoji' was never used; consider replacing with assignment to '_' or removing it
+204 |     
+205 |     func assert(_ b: Bool, line: UInt = #line, function: String = #function) {
+206 |         let emoji = b ? "✅" : "❌"
+    |             `- warning: initialization of immutable value 'emoji' was never used; consider replacing with assignment to '_' or removing it
+207 |         print()
+208 |     }
+
+
+
+
+</pre></div>
+
+		</main>
+
+
+		<script src="js/main.js"></script>
+		<script>
+			function loadContent(url, targetId) {
+				fetch(url)
+				.then(response => response.text())
+				.then(html => {
+					const parser = new DOMParser();
+					const doc = parser.parseFromString(html, 'text/html');
+					const newContent = doc.getElementById(targetId);
+					
+					if (newContent) {
+						document.getElementById(targetId).innerHTML = newContent.innerHTML;
+					} else {
+						console.error(`No se encontró un elemento con id ${targetId} en la respuesta.`);
+					}
+				})
+				.catch(error => console.error('Error al cargar el contenido:', error));
+			}
+			
+			// Ejemplo de uso
+			// loadContent('/ruta/a/recurso', 'main');
+		</script>
+		<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] +
+			':35729/livereload.js?snipver=2"></' + 'script>')</script>
+	</body>
+</html>
