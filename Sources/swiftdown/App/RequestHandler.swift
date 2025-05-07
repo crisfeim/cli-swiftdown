@@ -23,6 +23,9 @@ extension SwiftDown {
         }
         
         public func process(_ request: Request) -> Response {
+            if request.path == "/" || request.path.isEmpty {
+                return handleIndex()
+            }
             // if request has parameters, it's a resource
             guard !request.path.contains("?") else {
                 return handleResourceFileWithParameters(request)
@@ -43,6 +46,15 @@ extension SwiftDown {
             } else {
                 return handleResourceFile(request.path, ext: ext)
             }
+        }
+        
+        private func handleIndex() -> Response {
+            let fileURL = sourcesURL.appendingPathComponent("main.\(sourceExtension)")
+            guard let parsed = try? parser(fileURL) else {
+                return Response(statusCode: 400, contentType: "text/html", body: .text("Add your main.swift file!"))
+            }
+            
+            return Response(statusCode: 200, contentType: "text/html", body: .text(parsed))
         }
         
         func handleSourceFileWithHTMLExtension(_ path: String) -> Response {
