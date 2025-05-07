@@ -87,8 +87,8 @@ fileprivate func >>>(first: @escaping (String) -> String, second: @escaping (Str
 
 // MARK: - Definitions
 extension SwiftSyntaxHighlighter {
-	struct DefinitionsHighlighter {
-		enum Definition: String, CaseIterable {
+	public struct DefinitionsHighlighter {
+		public enum Definition: String, CaseIterable {
 			case `class`
 			case `enum` 
 			case `struct`
@@ -107,14 +107,14 @@ extension SwiftSyntaxHighlighter {
 			}
 		}
 		
-		
-		func run(_ string: String) -> String {
+        public init() {}
+		public func run(_ string: String) -> String {
 			highlightDefinition(on: Definition.allCases.reduce(string) { current, keyword in
 				highlightDefinition(on: current, keyword)
 			}, definition: "final class", cssClassName: "type-definition")
 		}
 		
-		func highlightDefinition(on string: String,_ definition: Definition) -> String {
+        public func highlightDefinition(on string: String,_ definition: Definition) -> String {
 			highlightDefinition(on: string, definition: definition.rawValue, cssClassName: definition.cssClassName)
 		} 
 		
@@ -144,45 +144,14 @@ extension SwiftSyntaxHighlighter {
 }
 
 
-#warning("Move to test target")
-class DefinitionsHighlighterTests {
-	func run() {
-		test_class()
-		test_enum()
-		test()
-	}
-	
-	func test_class() {
-		let sut = SwiftSyntaxHighlighter.DefinitionsHighlighter() 
-		let input = #"<span class="keyword">class</span> MyType"#
-		let expectedOutput = #"<span class="keyword">class</span> <span class="type-definition">MyType</span>"#
-		let output = sut.highlightDefinition(on: input, .class)
-		assert(output == expectedOutput)
-	}
-	
-	func test_enum() {
-		let sut = SwiftSyntaxHighlighter.DefinitionsHighlighter() 
-		let input = #"<span class="keyword">enum</span> MyType"#
-		let expectedOutput = #"<span class="keyword">enum</span> <span class="type-definition">MyType</span>"#
-		let output = sut.highlightDefinition(on: input, .enum)
-		assert(output == expectedOutput)
-	}
-	
-	func test() {
-		let sut = SwiftSyntaxHighlighter.DefinitionsHighlighter()
-		let input = #"<span class="keyword">class</span> MyType"#
-		let expectedOutput = #"<span class="keyword">class</span> <span class="type-definition">MyType</span>"#
-		let output = sut.run(input)
-		print(output)
-		assert(output == expectedOutput)
-	}
-}
 
 // MARK: - LineInjector
 extension SwiftSyntaxHighlighter {
-	fileprivate struct LineInjector {
+  public struct LineInjector {
+      
+      public init() {}
 		// Injects lines as html `<span>`
-		func run(_ string: String) -> String {
+      public func run(_ string: String) -> String {
 			string.components(separatedBy: "\n").enumerated().reduce("") { (result, line) in
 				let (index, content) = line
 				return result + makeLine(index, content)
@@ -192,28 +161,6 @@ extension SwiftSyntaxHighlighter {
 		private func makeLine(_ index: Int, _ content: String) -> String {
 			"<span id=\"line-\(index + 1)\" class=\"line-number \(content.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "empty-line" : "")\">\(index + 1)</span>" + content + "\n"
 		}
-	}
-}
-
-class LineInjectorTests {
-	func run() {
-		testRunWithEmptyString()
-	}
-	
-	func testRunWithEmptyString() {
-		let injector = SwiftSyntaxHighlighter.LineInjector()
-		let input = ""
-		let expectedOutput = "<span id=\"line-1\" class=\"line-number empty-line\">1</span>\n"
-		let output = injector.run(input)
-		assert(output == expectedOutput)
-	}
-}
-
-extension SwiftSyntaxHighlighter {
-	static func runTests() {
-		SwiftSyntaxHighlighterTests().run()
-		DefinitionsHighlighterTests().run()
-		LineInjectorTests().run()
 	}
 }
 
