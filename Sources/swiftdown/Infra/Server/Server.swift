@@ -105,18 +105,7 @@ public struct Server {
 			}
 		}
 	}
-	
 }
-
-//enum ServerTests {
-//	static func launch() {
-//		let themeURL   = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("input/theme")
-//		let sourcesURL = URL(fileURLWithPath: FileManager.default.currentDirectoryPath).appendingPathComponent("input/sources")
-//        let rh = SwiftDown.RequestHandler(parser: {"parsed: \($0)"}, themeURL: themeURL, sourcesURL: sourcesURL, sourceExtension: "swift")
-//		Server(port: 8080, requestHandler: rh).run()
-//	}
-//}
-
 
 
 
