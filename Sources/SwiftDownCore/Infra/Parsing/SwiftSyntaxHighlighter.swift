@@ -1,8 +1,9 @@
 import Foundation
+import Splash
 
 public struct SwiftSyntaxHighlighter {
-    #warning("Import Splash and remove invocation through bin")
-	private let splash = CommandRunner.splash
+    
+    private let splash = SyntaxHighlighter(format: HTMLOutputFormat())
 	private let lineInjector = LineInjector()
 	private let defintionHighlighter = DefinitionsHighlighter()
 	private let customTypeParser = CustomTypeHighlighter()
@@ -13,7 +14,7 @@ public struct SwiftSyntaxHighlighter {
 		let customTypes = customTypeParser.extractCustomTypes(from: string)
 		let paserCustomTypes = { customTypeParser.run($0, from: customTypes) }
 		return (
-			splash.run >>>
+			splash.highlight >>>
 			lineInjector.run >>>
 			defintionHighlighter.run >>>
 			parseKeywords >>>
@@ -269,43 +270,5 @@ extension SwiftSyntaxHighlighter {
 			}
 			return customTypes
 		}
-	}
-}
-
-
-struct CommandRunner {
-	let bin: String
-	
-	func run(_ command: String) -> String {
-		let process = Process()
-		process.launchPath = bin // Asigna directamente el binario
-		
-		process.arguments = [command] // Solo el comando
-		
-		let pipe = Pipe()
-		process.standardOutput = pipe
-		
-		process.launch()
-		
-		let data = pipe.fileHandleForReading.readDataToEndOfFile()
-		process.waitUntilExit()
-		
-		return String(data: data, encoding: .utf8) ?? ""
-	}
-	
-	static let splash = CommandRunner(bin: "/usr/local/bin/SplashHTMLGen")
-}
-
-
-final class CommandRunnerTests {
-	
-	func test() {
-		let sut = CommandRunner.splash
-		let output = sut.run("func hello(world: String) -> Int")
-		let expectedOutput = """
-		<span class="keyword">func</span> hello(world: <span class="type">String</span>) -&gt; <span class="type">Int</span>
-
-		"""
-		assert(output == expectedOutput)
 	}
 }
