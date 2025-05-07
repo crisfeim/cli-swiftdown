@@ -11,7 +11,6 @@ final class SwiftDownTests: XCTestCase, FileReader {
         let outputFiles = try fm.contentsOfDirectory(atPath: outputFolder().path)
         XCTAssert(outputFiles.contains("css"))
         XCTAssert(outputFiles.contains("js"))
-        XCTAssert(outputFiles.contains("fonts"))
         XCTAssert(outputFiles.contains("assets"))
         XCTAssert(!outputFiles.contains("index.html"))
     }

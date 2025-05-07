@@ -31,16 +31,6 @@ final class RequestHandlerTests: XCTestCase {
         XCTAssertEqual(response.bodyAsText , expectedResult)
     }
     
-    func test_process_fontFileReturnsFontFile() throws {
-        let sut = makeSUT()
-        let request = Request(method: .get, body: nil, path: "fonts/iAWriterQuattroS-Regular.woff2")
-        let response = sut.process(request)
-        let expectedResult = try readThemeResourceAsData("fonts/iAWriterQuattroS-Regular.woff2")
-        
-        XCTAssertEqual(response.contentType , "font/woff2")
-        XCTAssertEqual(response.binaryData , expectedResult)
-    }
-    
     func test_process_imageRequestsReturnsImage() throws {
         let sut = makeSUT()
         let response = sut.process(Request(method: .get, body: nil, path: "assets/author.jpg"))
