@@ -22,7 +22,7 @@ let package = Package(
             ]
         ),
         .testTarget(
-            name: "swiftdown-tests",
+            name: "SwiftDownCoreTests",
             dependencies: ["SwiftDownCore", "SimpleServer", "swiftdown"],
             resources: [
                 .copy("input")
