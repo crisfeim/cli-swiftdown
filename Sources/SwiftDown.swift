@@ -8,7 +8,7 @@ protocol Parser {
 	func parse(_ string: String) -> String
 }
 
-struct CodePublisher: FileHandler {
+struct SwiftDown: FileHandler {
 	
 	let runner         : Runner
 	
@@ -90,7 +90,7 @@ func >>><A>(first: @escaping (A) -> A, second: @escaping (A) -> A) -> (A) -> A {
 	return { input in second(first(input)) }
 }
 
-extension CodePublisher {
+extension SwiftDown {
 	struct Author {
 		let name: String
 		let website: String
@@ -114,8 +114,8 @@ final class Tests: FileReader {
 		try test_codesource_files_are_copied_as_html()
 	}
 	
-	func makeSUT() -> CodePublisher {
-		CodePublisher(
+	func makeSUT() -> SwiftDown {
+		SwiftDown(
 			runner: CodeRunner.swift, 
 			syntaxParser: SwiftSyntaxHighlighter(), 
 			logsParser: LogsParser(),
@@ -160,7 +160,7 @@ func launch_server() {
 	let sourcesURL = currentDir.appendingPathComponent("input/sources")
 	let outputURL  = currentDir.appendingPathComponent("input/output")
 	
-	let publisher = CodePublisher(
+	let publisher = SwiftDown(
 		runner: CodeRunner.swift, 
 		syntaxParser: SwiftSyntaxHighlighter(), 
 		logsParser: LogsParser(),
