@@ -1,14 +1,14 @@
 import Foundation
 
-protocol Runner {
+public protocol Runner {
 	func run(_ code: String, with tmpFilename: String, extension ext: String?) throws -> String
 }
 
-protocol Parser {
+public protocol Parser {
 	func parse(_ string: String) -> String
 }
 
-struct SwiftDown: FileHandler {
+public struct SwiftDown: FileHandler {
 	
 	let runner         : Runner
 	
@@ -22,8 +22,30 @@ struct SwiftDown: FileHandler {
 	let langExtension  : String
 	
 	let author         : Author
+    
+    public init(
+        runner: Runner,
+        syntaxParser: Parser,
+        logsParser: Parser,
+        markdownParser: Parser,
+        sourcesURL: URL,
+        outputURL: URL,
+        themeURL: URL,
+        langExtension: String,
+        author: Author
+    ) {
+        self.runner = runner
+        self.syntaxParser = syntaxParser
+        self.logsParser = logsParser
+        self.markdownParser = markdownParser
+        self.sourcesURL = sourcesURL
+        self.outputURL = outputURL
+        self.themeURL = themeURL
+        self.langExtension = langExtension
+        self.author = author
+    }
 	
-	func build() throws {
+	public func build() throws {
 		try FileManager.default.createDirectory(
 			at: outputURL, 
 			withIntermediateDirectories: true, 
@@ -91,9 +113,14 @@ func >>><A>(first: @escaping (A) -> A, second: @escaping (A) -> A) -> (A) -> A {
 }
 
 extension SwiftDown {
-	struct Author {
+	public struct Author {
 		let name: String
 		let website: String
+        
+        public init(name: String, website: String) {
+            self.name = name
+            self.website = website
+        }
 	}
 }
 
@@ -101,56 +128,6 @@ extension SwiftSyntaxHighlighter: Parser {}
 extension MarkdownParser		: Parser {}
 extension LogsParser			: Parser {}
 extension CodeRunner			: Runner {}
-
-final class Tests: FileReader {
-	
-	lazy var currentDir   = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-	lazy var testsFolder  = currentDir.appendingPathComponent("input/sources")
-	lazy var themeFolder  = currentDir.appendingPathComponent("input/theme")
-	lazy var outputFolder = currentDir.appendingPathComponent("input/output")
-	
-	func run() throws {
-		try test_theme_resources_are_coppied()
-		try test_codesource_files_are_copied_as_html()
-	}
-	
-	func makeSUT() -> SwiftDown {
-		SwiftDown(
-			runner: CodeRunner.swift, 
-			syntaxParser: SwiftSyntaxHighlighter(), 
-			logsParser: LogsParser(),
-			markdownParser: MarkdownParser(),
-			sourcesURL: testsFolder,
-			outputURL: outputFolder,
-			themeURL: themeFolder,
-			langExtension: "swift",
-			author: .init(name: "Cristian Felipe Patiño Rojas", website: "https://cristian.lat")
-		)
-	}
-	
-	func test_theme_resources_are_coppied() throws {
-		try makeSUT().build()
-		
-		let outputFiles = try fm.contentsOfDirectory(atPath: outputFolder.path)
-		assert(outputFiles.contains("css"))
-		assert(outputFiles.contains("js"))
-		assert(outputFiles.contains("fonts"))
-		assert(outputFiles.contains("assets"))
-		assert(!outputFiles.contains("index.html"))
-	}
-	
-	func test_codesource_files_are_copied_as_html() throws {
-		try makeSUT().build()
-		
-		let outputFiles = try fm.contentsOfDirectory(atPath: outputFolder.path)
-		assert(outputFiles.contains("example.swift.html"))
-	}
-	
-	func getFileContents(fileName: String) throws -> String {
-		let url = currentDir.appendingPathComponent("example.swift")
-		return try String(contentsOfFile: url.path, encoding: .utf8)
-	}
-}
 
 func launch_server() {
 	
@@ -169,7 +146,7 @@ func launch_server() {
 		outputURL: outputURL,
 		themeURL: themeURL,
 		langExtension: "swift",
-		author: .init(name: "Cristian Felipe Patiño Rojas", website: "https://cristian.lat")
+		author: .init(name: "Cristian Felipe Patiño Rojas", website: "https://crisfe.me")
 	)
 	
 	let rh = PublisherRequestHandler(

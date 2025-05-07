@@ -1,6 +1,6 @@
 import Foundation
 
-struct TextFile {
+public struct TextFile {
 	let name: String
 	let content: String
 }
@@ -8,8 +8,8 @@ struct TextFile {
 protocol FileHandler: FileReader, FileWriter {}
 
 
-protocol FileReader {}
-extension FileReader {
+public protocol FileReader {}
+public extension FileReader {
 	var fm: FileManager {.default}
 	
 	func getFileURLs(in folderURL: URL) throws -> [URL] {

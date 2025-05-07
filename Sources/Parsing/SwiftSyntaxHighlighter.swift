@@ -1,12 +1,14 @@
 import Foundation
 
-struct SwiftSyntaxHighlighter {
+public struct SwiftSyntaxHighlighter {
 	
 	private let splash = CommandRunner.splash
 	private let lineInjector = LineInjector()
 	private let defintionHighlighter = DefinitionsHighlighter()
 	private let customTypeParser = CustomTypeHighlighter()
 	
+    
+    public init() {}
 	 func run(_ string: String) -> String {
 		let customTypes = customTypeParser.extractCustomTypes(from: string)
 		let paserCustomTypes = { customTypeParser.run($0, from: customTypes) }
@@ -21,7 +23,7 @@ struct SwiftSyntaxHighlighter {
 		)(string)
 	}
 
-	func parse(_ string: String) -> String { run(string) }
+	public func parse(_ string: String) -> String { run(string) }
 	
 	fileprivate func parseKeywords(on string: String) -> String {
 		

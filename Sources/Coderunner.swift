@@ -1,13 +1,13 @@
 import Foundation
 
-struct CodeRunner {
+public struct CodeRunner {
     let executablePath: String
 
     func run(_ code: String) throws -> String {
         try run(code, with: "temp", extension: nil)
     }
 
-    func run(_ code: String, with tmpFilename: String, extension ext: String?) throws -> String {
+    public func run(_ code: String, with tmpFilename: String, extension ext: String?) throws -> String {
         let tempFileURL = FileManager.default.temporaryDirectory.appendingPathComponent(
             "\(tmpFilename).\(ext ?? "no-extension")")
         try write(code, to: tempFileURL)
@@ -40,5 +40,5 @@ struct CodeRunner {
         try string.write(to: url, atomically: true, encoding: .utf8)
     }
 
-    static let swift = CodeRunner(executablePath: "/usr/bin/swift")
+    nonisolated(unsafe) public static let swift = CodeRunner(executablePath: "/usr/bin/swift")
 }
