@@ -15,15 +15,20 @@ struct SwiftDownCLI: ParsableCommand {
 
 extension SwiftDownCLI {
     struct Build: ParsableCommand {
+        @Argument(help: "Project folder's path")
+                var folder: String = "."
+        
         func run() throws {
-            let (ssg, _) = try Composer.compose()
+            let (ssg, _) = try Composer.compose(folder)
             try ssg.build()
         }
     }
     
     struct Serve: ParsableCommand {
+        @Argument(help: "Project folder's path")
+                var folder: String = "."
         func run() throws {
-            let (_, server) = try Composer.compose()
+            let (_, server) = try Composer.compose(folder)
             server.run()
         }
     }

@@ -6,9 +6,8 @@ import ArgumentParser
 import swiftdown
 
 enum Composer {
-    static func compose() throws -> (SwiftDown, Server) {
-//        let currentDir = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-        let folderURL   = URL(fileURLWithPath: ".").standardizedFileURL
+    static func compose(_ pathURL: String) throws -> (SwiftDown, Server) {
+        let folderURL   = URL(fileURLWithPath: pathURL).standardizedFileURL
         let sourcesURL  = folderURL.appendingPathComponent("sources")
         let themeURL    = folderURL.appendingPathComponent("theme")
         let outputURL   = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
