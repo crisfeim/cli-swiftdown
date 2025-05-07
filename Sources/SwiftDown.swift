@@ -1,9 +1,5 @@
 import Foundation
 
-
-
-
-
 public struct SwiftDown: FileHandler {
 	
 	let runner         : Runner
@@ -121,9 +117,9 @@ extension SwiftDown {
 }
 
 extension SwiftSyntaxHighlighter: Parser {}
-extension MarkdownParser		: Parser {}
-extension LogsParser			: Parser {}
-extension CodeRunner			: Runner {}
+extension MarkdownParser		 : Parser {}
+extension LogsParser			 : Parser {}
+extension CodeRunner			 : Runner {}
 
 func launch_server() {
 	
@@ -145,13 +141,13 @@ func launch_server() {
 		author: .init(name: "Cristian Felipe Patiño Rojas", website: "https://crisfe.me")
 	)
 	
-	let rh = PublisherRequestHandler(
-		parser: publisher.parse, 
+    let rh = SwiftDown.RequestHandler(
+		parser: publisher.parse,
 		themeURL: themeURL,
 		sourcesURL: sourcesURL, 
 		sourceExtension: "swift"
 	)
 	
-	Server(port: 8080, requestHandler: rh).run()
+    Server(port: 8080, requestHandler: rh.process).run()
 }
 

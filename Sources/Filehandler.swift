@@ -7,7 +7,6 @@ public struct TextFile {
 
 protocol FileHandler: FileReader, FileWriter {}
 
-
 public protocol FileReader {}
 public extension FileReader {
 	var fm: FileManager {.default}

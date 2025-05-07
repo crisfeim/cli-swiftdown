@@ -18,7 +18,6 @@ final class SwiftDownTests: XCTestCase, FileReader {
     
     func test_codesource_files_are_copied_as_html() throws {
         try makeSUT().build()
-        
         let outputFiles = try fm.contentsOfDirectory(atPath: outputFolder().path)
         XCTAssert(outputFiles.contains("example.swift.txt.html"))
     }
@@ -36,7 +35,7 @@ final class SwiftDownTests: XCTestCase, FileReader {
             markdownParser: MarkdownParser(),
             sourcesURL: sourcesFolder(),
             outputURL: outputFolder(),
-            themeURL: themesFolder(),
+            themeURL: themeFolder(),
             langExtension: "swift",
             author: .init(name: "Cristian Felipe Patiño Rojas", website: "https://cristian.lat")
         )
@@ -46,12 +45,16 @@ final class SwiftDownTests: XCTestCase, FileReader {
         Bundle.module.bundleURL.appendingPathComponent("Contents/Resources")
     }
     
-    func sourcesFolder() -> URL {
+    func inputFolder() -> URL {
         testsResourceDirectory().appendingPathComponent("input")
     }
     
-    func themesFolder() -> URL {
-        sourcesFolder().appendingPathComponent("theme")
+    func sourcesFolder() -> URL {
+        inputFolder().appendingPathComponent("sources")
+    }
+    
+    func themeFolder() -> URL {
+        inputFolder().appendingPathComponent("theme")
     }
     
     func outputFolder() -> URL {

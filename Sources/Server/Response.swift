@@ -1,0 +1,48 @@
+// Created by Cristian Felipe Patiño Rojas on 7/5/25.
+
+
+import Foundation
+
+public struct Response {
+	let statusCode: Int
+	public let contentType: String
+	let body: Body
+	
+	enum Body {
+		case text(String)
+		case binary(Data)
+	}
+	
+	func toHTTPResponse() -> String {
+		var response = "HTTP/1.1 \(statusCode)\r\n"
+		response += "Content-Type: \(contentType)\r\n"
+		
+		switch body {
+		case .text(let textBody):
+			response += "Content-Length: \(textBody.utf8.count)\r\n"
+			response += "\r\n" // Separador entre headers y body
+			response += textBody
+		case .binary(let binaryBody):
+			response += "Content-Length: \(binaryBody.count)\r\n"
+			response += "\r\n" // Separador entre headers y body
+		}
+		
+		return response
+	}
+	
+	public var bodyAsText: String? {
+		switch body {
+			case .text(let text): return text
+			default: return nil
+		}
+	}
+	
+	public var binaryData: Data? {
+		switch body {
+		case .binary(let binaryBody):
+			return binaryBody
+		case .text:
+			return nil
+		}
+	}
+}
