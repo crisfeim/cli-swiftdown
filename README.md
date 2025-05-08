@@ -1,5 +1,9 @@
 # Swiftdown
 
+![status: archived](https://img.shields.io/badge/status-archived-lightgrey.svg)
+![maintenance: inactive](https://img.shields.io/badge/maintenance-inactive-red.svg)
+![type: cli-tool](https://img.shields.io/badge/type-cli--tool-blue.svg)
+
 > Because Markdown was too mainstream.
 
 A Swift-based article generator for technical writing in `.swift` files.
