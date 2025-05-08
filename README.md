@@ -92,4 +92,5 @@ MIT — You are free to use, modify, and distribute this project. Attribution is
 
 ## Credits
 
-Syntax highlighting provided by [Splash](https://github.com/JohnSundell/Splash) by John Sundell.
+- Theme toggle styles adapted from [theme-toggles](https://github.com/AlfieJones/theme-toggles) by Alfred Jones — MIT License.
+- Syntax highlighting provided by [Splash](https://github.com/JohnSundell/Splash) by John Sundell.

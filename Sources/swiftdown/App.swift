@@ -1,4 +1,5 @@
-// Created by Cristian Felipe Patiño Rojas on 7/5/25.
+// Copyright © 2025 Cristian Felipe Patiño Rojas
+// Released under the MIT License
 
 import Foundation
 import ArgumentParser
