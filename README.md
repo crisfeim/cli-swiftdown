@@ -55,6 +55,8 @@ You need to structure your project as follows:
     |- theme
 ```
 
+For an example theme see `example` folder.
+
 Then pass it to the CLI
 
 ```bash
