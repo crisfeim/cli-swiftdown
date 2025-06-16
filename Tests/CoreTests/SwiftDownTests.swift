@@ -5,6 +5,14 @@ import Core
 
 final class SwiftDownTests: XCTestCase, FileReader {
     
+    override func setUp() {
+        try? FileManager.default.removeItem(at: outputFolder())
+    }
+    
+    override func tearDown() {
+        try? FileManager.default.removeItem(at: outputFolder())
+    }
+    
     func test_theme_resources_are_coppied() throws {
         try makeSUT().build()
         
@@ -56,7 +64,15 @@ final class SwiftDownTests: XCTestCase, FileReader {
         inputFolder().appendingPathComponent("theme")
     }
     
+    private func cachesDirectory() -> URL {
+        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
+    }
+    
+    private func testSpecificURL() -> URL {
+        return cachesDirectory().appendingPathComponent("\(type(of: self))")
+    }
+    
     func outputFolder() -> URL {
-        testsResourceDirectory().appendingPathExtension("output")
+        testSpecificURL().appendingPathComponent("output")
     }
 }
