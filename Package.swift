@@ -24,13 +24,7 @@ let package = Package(
         .testTarget(
             name: "CoreTests",
             dependencies: ["Core", "swiftdown", "Server"],
-            resources: [
-                .copy("input")
-            ]
-        ),
-        .testTarget(
-            name: "swiftdownTests",
-            dependencies: ["swiftdown", "Server"],
+            resources: [.copy("input")]
         )
     ]
 )
