@@ -4,7 +4,7 @@
 import Foundation
 import ArgumentParser
 import Core
-import Server
+import MiniSwiftServer
 
 enum Composer {
     static func compose(with pathURL: String) throws -> (Swiftdown, Server) {

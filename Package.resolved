@@ -1,6 +1,15 @@
 {
-  "originHash" : "cc90da96f992d5b35188e80031a6a6c502b97101a1a549379f9a7c2a9a69a169",
+  "originHash" : "63f708c3b2c2a3c96a01b9353321533e894da71b9cac6f2375201e18b7b1ea6e",
   "pins" : [
+    {
+      "identity" : "package-mini-swift-server",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/crisfeim/package-mini-swift-server",
+      "state" : {
+        "branch" : "main",
+        "revision" : "684bd47b20049986dbfa2a0f5a695478b804528e"
+      }
+    },
     {
       "identity" : "splash",
       "kind" : "remoteSourceControl",
@@ -15,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser",
       "state" : {
-        "revision" : "41982a3656a71c768319979febd796c6fd111d5c",
-        "version" : "1.5.0"
+        "revision" : "011f0c765fb46d9cac61bca19be0527e99c98c8b",
+        "version" : "1.5.1"
       }
     }
   ],

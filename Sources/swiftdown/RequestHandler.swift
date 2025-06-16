@@ -2,7 +2,7 @@
 // Released under the MIT License
 
 import Foundation
-import Server
+import MiniSwiftServer
 import Core
 
 public struct RequestHandler {

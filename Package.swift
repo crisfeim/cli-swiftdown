@@ -8,22 +8,22 @@ let package = Package(
     platforms: [.macOS(.v13)],
     dependencies: [
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.2.0"),
-        .package(url: "https://github.com/JohnSundell/Splash", from: "0.1.0")
+        .package(url: "https://github.com/JohnSundell/Splash", from: "0.1.0"),
+        .package(url: "https://github.com/crisfeim/package-mini-swift-server", branch: "main")
     ],
     targets: [
         .target(name: "Core", dependencies: ["Splash"]),
-        .target(name: "Server"),
         .executableTarget(
             name: "swiftdown",
             dependencies: [
                 "Core",
-                "Server",
+                .product(name: "MiniSwiftServer", package: "package-mini-swift-server"),
                 .product(name: "ArgumentParser", package: "swift-argument-parser")
             ]
         ),
         .testTarget(
             name: "CoreTests",
-            dependencies: ["Core", "swiftdown", "Server"],
+            dependencies: ["Core", "swiftdown", .product(name: "MiniSwiftServer", package: "package-mini-swift-server")],
             resources: [.copy("input")]
         )
     ]
